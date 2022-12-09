@@ -9,6 +9,7 @@ import Logout from "./Logout";
 import Navbar from "./Navbar";
 import logo from "../img/logo.svg";
 
+
 const AllRoutes = () => {
     const [posts, setPosts] = useState([]);
     useEffect(() => {
@@ -19,7 +20,7 @@ const AllRoutes = () => {
     }, []);
     console.log(posts)
     return (
-        <><div className="logo">
+        <div><div className="logo">
             <img src={logo} alt="Stranger's Things Logo" />
         </div><Navbar />
             <Routes>
@@ -28,9 +29,8 @@ const AllRoutes = () => {
                 <Route path="/signup" element={<Register />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/logout" element={<Logout />} />
-            </Routes></>
+                {/* <Route path="/user/{id}" element={<User />} /> */}
+            </Routes></div>
     )
 }
-
-
 export default AllRoutes;
