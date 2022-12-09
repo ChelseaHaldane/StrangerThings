@@ -1,7 +1,7 @@
 // All imported libraries needed for this component to run
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "./api/apiHelper";
-// import "index.css";
+import './index.css';
 import Register from "./components/Register";
 
 function App() {
