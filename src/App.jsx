@@ -2,14 +2,20 @@
 import { useState, useEffect } from "react";
 import { fetchAllPosts } from "./api/apiHelper";
 import './index.css';
-import Register from "./components/Register";
+import AllRoutes from "./components/Routes";
+
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Start of Application</h1>
+      <AllRoutes />
     </div>
+
   );
 }
+
+
+
 
 export default App
