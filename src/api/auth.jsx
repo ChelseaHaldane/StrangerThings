@@ -23,8 +23,8 @@ export const authenticateUser = async (username, password, method) => {
     if (!result.data.token) {
       return;
     } else {
+      // window.localStorage.setItem({ "strange-token": result.data.token, "name": result.data.name });
       window.localStorage.setItem("strange-token", result.data.token);
-
       return await me();
     }
   } catch (error) {
@@ -46,8 +46,12 @@ export const me = async () => {
       });
 
       const { data: user } = await response.json();
-      console.log("hey look it is me: ", user);
-      return user;
+      // console.log("hey look it is me: ", user);
+      return (
+        <div>
+          <h1>`${me.username}`</h1>
+        </div>
+      );
     }
     return;
   } catch (error) {

@@ -31,22 +31,22 @@ import { fetchAllPosts } from "../api/apiHelper";
 // }
 // export default Posts
 
-function Posts() {
+function Posts({ posts }) {
     // Creates const 'posts' and a function to set it 'setPosts()'
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
 
     // Triggers a function when the depency setPosts changes
-    useEffect(() => {
+    // useEffect(() => {
 
-        // See https://javascript.info/promise-api
-        Promise.all([fetchAllPosts]).then(async () => {
+    //     // See https://javascript.info/promise-api
+    //     Promise.all([fetchAllPosts]).then(async () => {
 
-            // Sets the const 'posts' to the value returned by fetchAllPosts()
-            // Note: the 'await' keyword is required because it is an async function
-            setPosts(await fetchAllPosts());
-        });
-        // Declaration of dependency setPosts() for the useEffect()
-    }, [setPosts]);
+    //         // Sets the const 'posts' to the value returned by fetchAllPosts()
+    //         // Note: the 'await' keyword is required because it is an async function
+    //         setPosts(await fetchAllPosts());
+    //     });
+    //     // Declaration of dependency setPosts() for the useEffect()
+    // }, [setPosts]);
 
     // Maps the posts and returns a <div> containing the HTML post
     return posts.map((post) => {
