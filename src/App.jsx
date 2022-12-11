@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom/client'
 import AllRoutes from "./components/Routes";
 import { fetchAllPosts } from './api/apiHelper';
 import React, { useEffect, useState } from 'react';
+import Create from './components/Create';
+import Update from './components/Update';
 
 function App() {
   const [posts, setPosts] = useState([]);

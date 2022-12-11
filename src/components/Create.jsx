@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { me } from "../api/auth";
 
 const Create = ({ posts, setPosts }) => {
     const [title, setTitle] = useState([]);
@@ -7,15 +8,20 @@ const Create = ({ posts, setPosts }) => {
     const handleSubmit = async (ev) => {
         ev.preventDefault();
         console.log('title, body; ', title, body);
-        const response = await fetch('https://strangers-things.herokuapp.com/api/', {
-            method: 'POST',
+        const token = window.localStorage.getItem("strange-token");
+        const response = await fetch('https://strangers-things.herokuapp.com/api/', {  
+        method: 'POST',
             headers: {
                 'Content-type': 'Application/json',
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify({
+                post: {
                 title,
                 body,
-            })
+                price,
+                willDeliver
+            }})
         });
         const data = await response.json();
         console.log('data: ', data);
@@ -23,9 +29,7 @@ const Create = ({ posts, setPosts }) => {
         setTitle('');
         setBody('');
     }
-}
-
-return <>
+    return (<>
     <h3>
         Create a Post
     </h3>
@@ -34,4 +38,7 @@ return <>
         <input type="text" placeholder="body" value={body} onChange={(ev) => setBody(ev.target.value)}></input>
         <button type="submit" className="btn btn-outline-primary">Submit</button>
     </form>
-</>
+</>)
+}
+
+export default Create;
