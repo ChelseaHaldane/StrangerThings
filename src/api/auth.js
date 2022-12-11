@@ -1,3 +1,5 @@
+import makeHeaders from "./Header";
+
 const BASE_URL = "https://strangers-things.herokuapp.com/api/";
 const COHORT_NAME = "2211-FTB-ET-WEB-FT";
 const API_URL = BASE_URL + COHORT_NAME;
@@ -7,9 +9,7 @@ export const authenticateUser = async (username, password, method) => {
   try {
     const response = await fetch(`${API_URL}/users/${method}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: makeHeaders(),
       body: JSON.stringify({
         user: {
           username: username,
@@ -20,11 +20,15 @@ export const authenticateUser = async (username, password, method) => {
 
     const result = await response.json();
     // console.log(result.data);
+    if (result.success === false) {
+      const newError = new Error(result.error.message);
+      throw newError;
+    }
     if (!result.data.token) {
       return;
     } else {
-      // window.localStorage.setItem({ "strange-token": result.data.token, "name": result.data.name });
       window.localStorage.setItem("strange-token", result.data.token);
+
       return await me();
     }
   } catch (error) {
@@ -39,19 +43,12 @@ export const me = async () => {
     if (token) {
       const response = await fetch(`${API_URL}/users/me`, {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: makeHeaders(token),
       });
 
       const { data: user } = await response.json();
-      // console.log("hey look it is me: ", user);
-      return (
-        <div>
-          <h1>`${me.username}`</h1>
-        </div>
-      );
+      console.log("hey look it is me: ", user);
+      return user;
     }
     return;
   } catch (error) {

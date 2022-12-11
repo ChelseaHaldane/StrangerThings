@@ -11,20 +11,13 @@ import logo from "../img/logo.svg";
 
 
 const AllRoutes = () => {
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        const fetchInitialData = async () => {
-            setPosts(await fetchAllPosts());
-        };
-        fetchInitialData();
-    }, []);
-    console.log(posts)
+
     return (
         <div><div className="logo">
             <img src={logo} alt="Stranger's Things Logo" />
         </div><Navbar />
             <Routes>
-                <Route path="/" element={<Home posts={posts} />} />
+                <Route path="/" element={<Home/>} />
                 {/* <Route path="/posts" element={<Posts />} /> */}
                 <Route path="/signup" element={<Register />} />
                 <Route path="/login" element={<Login />} />
