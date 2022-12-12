@@ -1,4 +1,5 @@
 import { authenticateUser } from "./auth";
+import makeHeaders from "./header";
 
 const cohortName = "2211-ftb-et-web-ft";
 const apiUrl = `https://strangers-things.herokuapp.com/api/${cohortName}`;
@@ -64,15 +65,17 @@ export async function fetchSinglePost(postId) {
   }
 }
 
-export async function createPost(post, userToken) {
+export async function createPost(post) {
   try {
+    const userToken = window.localStorage.getItem("strange-token");
+    if (!userToken) {
+      const error = new Error('User not logged in.');
+      throw error;
+    }
     const response = await fetch(`${apiUrl}/posts/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
-      },
-      body: JSON.stringify(post),
+      headers: makeHeaders(userToken),
+      body: JSON.stringify({ post }),
     });
 
     const result = await response.json();
