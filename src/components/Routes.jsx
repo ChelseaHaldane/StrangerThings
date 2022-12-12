@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { fetchAllPosts } from "../api/apiHelper";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import Login from "./Login";
-import Posts from "./Posts";
 import Register from "./Register";
 import Logout from "./Logout";
 import Navbar from "./Navbar";
@@ -11,13 +9,12 @@ import logo from "../img/logo.svg";
 
 
 const AllRoutes = () => {
-
     return (
         <div><div className="logo">
             <img src={logo} alt="Stranger's Things Logo" />
         </div><Navbar />
             <Routes>
-                <Route path="/" element={<Home/>} />
+                <Route path="/" element={<Home />} />
                 {/* <Route path="/posts" element={<Posts />} /> */}
                 <Route path="/signup" element={<Register />} />
                 <Route path="/login" element={<Login />} />

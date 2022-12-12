@@ -16,10 +16,7 @@ export async function fetchAllPostsWithAuth(userToken) {
   try {
     const response = await fetch(`${apiUrl}/posts/`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
-      },
+      headers: makeHeaders(userToken)
     });
 
     const result = await response.json();
@@ -134,10 +131,7 @@ export async function createMessage(postId, userToken, message) {
   try {
     const response = await fetch(`${apiUrl}/posts/${postId}/messages/`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${userToken}`,
-      },
+      headers: makeHeaders(userToken),
       body: JSON.stringify(message),
     });
 

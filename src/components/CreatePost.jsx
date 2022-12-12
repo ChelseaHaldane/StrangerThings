@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-const CreatePost = ({ handleFormSubmit }) => {
+const CreatePost = ({ postSubmitted }) => {
     // const [newPost, setNewPost] = useState({});
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -19,7 +19,15 @@ const CreatePost = ({ handleFormSubmit }) => {
     const handleWillDeliverChange = (event) => {
         setWillDeliver(event.target.checked);
     }
-
+    const handleFormSubmit = () => {
+        const post = {
+            title,
+            description,
+            price,
+            willDeliver
+        }
+        postSubmitted(post);
+    }
     /*post: {
       title: "My favorite stuffed animal",
       description: "This is a pooh doll from 1973. It has been carefully taken care of since I first got it.",
